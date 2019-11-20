@@ -1,0 +1,7 @@
+mongoimport --host ClusterMongoDB-shard-0/clustermongodb-shard-00-00-1sv33.mongodb.net:27017,clustermongodb-shard-00-01-1sv33.mongodb.net:27017,clustermongodb-shard-00-02-1sv33.mongodb.net:27017 --ssl --username up_tap_veraz --password QoNCPCuTYSp3uAjC --authenticationDatabase admin --db up_tap --collection verazs --type=csv --headerline --file=cuil.csv
+
+
+
+mongoimport --db=up_tap --collection=verazs --type=csv --headerline --file=cuil.csv
+
+name.string()

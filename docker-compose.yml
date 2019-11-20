@@ -1,0 +1,46 @@
+version: '3'
+services:
+  tap_api_gateway:
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - TOKEN_HOST=tap_token_validator
+      - TOKEN_PORT=3001
+      - REQ_COUNTER_HOST=tap_request_counter
+      - REQ_COUNTER_PORT=3002
+      - VERAZ_HOST=tap_veraz
+      - VERAZ_PORT=3003
+    links:
+      - tap_token_validator
+      - tap_request_counter
+      - tap_veraz
+    image:
+      'murruni/tap_api_gateway:latest'
+  tap_token_validator:
+    ports:
+      - "3001"
+    environment:
+      - PORT=3001
+      - GATEWAY_PORT=3000
+      - GATEWAY_HOST=tap_api_gateway
+    image:
+      'murruni/tap_token_validator:latest'
+  tap_request_counter:
+    ports:
+      - "3002"
+    environment:
+      - PORT=3002
+      - GATEWAY_PORT=3000
+      - GATEWAY_HOST=tap_api_gateway
+    image:
+      'murruni/tap_request_counter:latest'
+  tap_veraz:
+    ports:
+      - "3003"
+    environment:
+      - PORT=3003
+      - GATEWAY_PORT=3000
+      - GATEWAY_HOST=tap_api_gateway
+    image:
+      'murruni/tap_veraz:latest'
